@@ -13,7 +13,7 @@ public class Consumer {
 
     private final Logger logger = LoggerFactory.getLogger(Producer.class);
 
-    @KafkaListener(topics = "orders", groupId = "group_id")
+    @KafkaListener(topics = "orders-consumer", groupId = "group_id")
     public void consume(Order order) throws IOException {
         logger.info(String.format("#### -> Consumed message -> %s", order));
     }
