@@ -1,11 +1,9 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.Order;
 import com.example.demo.service.Producer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/kafka")
@@ -19,7 +17,9 @@ public class KafkaController {
     }
 
     @PostMapping(value = "/publish")
-    public void sendMessageToKafkaTopic(@RequestParam("message") String message) {
-        this.producer.sendMessage(message);
+    public String sendMessageToKafkaTopic(@RequestBody Order order) {
+        System.out.println(order.toString());
+        this.producer.sendMessage(order);
+        return order.toString();
     }
 }
